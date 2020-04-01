@@ -1,0 +1,50 @@
+global key
+InitKeyboard();
+
+while 1
+    pause (0.1);
+    switch key
+        case 'w'
+            disp('Going forward!');
+            brick.MoveMotor('A',100);
+            brick.MoveMotor('B',100);
+        
+        case 's'
+            disp('Going Backward!');
+            brick.MoveMotor('A',-100);
+            brick.MoveMotor('B',-100);
+            
+        case 'a'
+            disp('Rotating left!');
+            brick.MoveMotor('A',-100);
+            brick.MoveMotor('B',100);
+            
+        case ('d')
+            disp('rotating right!');
+            brick.MoveMotor('A',100);
+            brick.MoveMotor('B',-100);
+            
+        case ('q')
+            disp('Turning Left!');
+            brick.MoveMotor('A',50);
+            brick.MoveMotor('B',100);  
+            
+        case ('e')
+            disp('Turning right!');
+            brick.MoveMotor('A',100);
+            brick.MoveMotor('B',50);    
+            
+        case 0          % No Key is being pressed
+            disp('No Key pressed');
+            brick.StopMotor('A',0);
+            brick.StopMotor('B',0);
+            
+        case 'o'            %press "o" to quit
+            break;
+            
+    end
+    
+end
+    
+
+closeKeyboard();
