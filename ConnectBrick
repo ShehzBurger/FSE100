@@ -1,4 +1,4 @@
-brick = ConnectBrick('GUNI');
+brick = ConnectBrick('GUNI');   % do this everytime to connectbrick properly
 
 brick.playTone(100, 800, 500);
 
