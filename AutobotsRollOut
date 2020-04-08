@@ -93,7 +93,7 @@ while 1
     switch key
         case 'q'
             disp ('bye bye');
-            break
+            break;
             
     end
     
