@@ -37,7 +37,7 @@ while 1
             brick.MoveMotor('B',100);
             
         case 2
-            disp('Blue, drop off'); % this is the pickup code
+            disp('Blue, drop off'); % this is the drop off code
             if blue == 0
                 brick.MoveMotor('A', 0);
                 brick.MoveMotor('B', 0);
@@ -59,8 +59,8 @@ while 1
                 green = 1;
             end
             
-                brick.StopMotor('A',100);
-                brick.StopMotor('B',50);
+                brick.MoveMotor('A',100);
+                brick.MoveMotor('B',50);
             
 
         case 4
@@ -77,16 +77,15 @@ while 1
                 pause (4.0);
                 red = 1;
             end
-                brick.StopMotor('A',100);
-                brick.StopMotor('B',50);
+                brick.MoveMotor('A',100);
+                brick.MoveMotor('B',50);
             
             
         case 6          % No Key is being pressed
             disp('White! R');
-            brick.StopMotor('A',100);
-            brick.StopMotor('B',50);
+            brick.MoveMotor('A',100);
+            brick.MoveMotor('B',50);
             red = 0;
-            green = 0;
             
     end
             
