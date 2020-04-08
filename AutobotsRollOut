@@ -30,18 +30,18 @@ while 1
 % 7 brown
     
     switch color    % A left motor B right motor D claw motor
-        case 0
+        case 'none'
             disp('Waiting!');
             brick.MoveMotor('A',0);
             brick.MoveMotor('B',0);
             brick.MoveMotor('D',0);
 
-        case 1
+        case 'black'
             disp('Black! L');
             brick.MoveMotor('A',50);
             brick.MoveMotor('B',100);
             
-        case 2
+        case 'blue'
             disp('Blue, drop off'); % this is the drop off code
             if blue == 0
                 brick.MoveMotor('A', 0);
@@ -53,7 +53,7 @@ while 1
             end
             break;            
             
-        case 3
+        case 'green'
             disp('Green, pickup'); % this is the pickup code
             if green == 0
                 brick.MoveMotor('A', 0);
@@ -68,13 +68,13 @@ while 1
                 brick.MoveMotor('B',50);
             
 
-        case 4
+        case 'yellow'
             disp('Yellow');
             brick.MoveMotor('A',00);
             brick.MoveMotor('B',00); 
             brick.MoveMotor('D',00);
             
-        case 5
+        case 'red'
             disp('Red, STOP'); %stop for 4 seconds
             if red == 0
                 brick.MoveMotor('A', 0);
@@ -86,7 +86,7 @@ while 1
                 brick.MoveMotor('B',50);
             
             
-        case 6          % No Key is being pressed
+        case 'white'          % No Key is being pressed
             disp('White! R');
             brick.MoveMotor('A',100);
             brick.MoveMotor('B',50);
