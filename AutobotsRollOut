@@ -2,6 +2,7 @@ global color
 global green
 global red
 global blue
+global key
 InitKeyboard();
 
 brick.SetColorMode(1, 2);  % Set Color Sensor connected to Port 1 to Color RGB Mode.
@@ -40,7 +41,7 @@ while 1
             if blue == 0
                 brick.MoveMotor('A', 0);
                 brick.MoveMotor('B', 0);
-                brick.MoveMotor('D', -100);
+                brick.MoveMotor('D', -50);
                 pause (0.5);
                 brick.MoveMotor('D', 0);
                 blue = 1;
@@ -52,7 +53,7 @@ while 1
             if green == 0
                 brick.MoveMotor('A', 0);
                 brick.MoveMotor('B', 0);
-                brick.MoveMotor('D', 100);
+                brick.MoveMotor('D', 50);
                 pause (0.5);
                 brick.MoveMotor('D', 0);
                 green = 1;
@@ -87,9 +88,12 @@ while 1
             red = 0;
             green = 0;
             
+    end
+            
+    switch key
         case 'q'
-            disp('bye bye');
-            break;
+            disp ('bye bye');
+            break
             
     end
     
