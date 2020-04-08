@@ -1,0 +1,99 @@
+global color
+global green
+global red
+global blue
+InitKeyboard();
+
+brick.SetColorMode(1, 2);  % Set Color Sensor connected to Port 1 to Color RGB Mode.
+
+while 1
+    pause (0.1);
+    
+    green = 0;
+    blue = 0;
+    red = 0;
+    color = brick.ColorCode(1);  % Get Color on port 1.
+    display(color);                 % Print color code of object.
+% 0 no color
+% 1 black
+% 2 blue
+% 3 green
+% 4 yellow
+% 5 red
+% 6 white
+% 7 brown
+    
+    switch color    % A left motor B right motor D claw motor
+        case 0
+            disp('Waiting!');
+            brick.MoveMotor('A',0);
+            brick.MoveMotor('B',0);
+            brick.MoveMotor('D',0);
+
+        case 1
+            disp('Black! L');
+            brick.MoveMotor('A',50);
+            brick.MoveMotor('B',100);
+            
+        case 2
+            disp('Blue, drop off'); % this is the pickup code
+            if blue == 0
+                brick.MoveMotor('A', 0);
+                brick.MoveMotor('B', 0);
+                brick.MoveMotor('D', -100);
+                pause (0.5);
+                brick.MoveMotor('D', 0);
+                blue = 1;
+            end
+            break;            
+            
+        case 3
+            disp('Green, pickup'); % this is the pickup code
+            if green == 0
+                brick.MoveMotor('A', 0);
+                brick.MoveMotor('B', 0);
+                brick.MoveMotor('D', 100);
+                pause (0.5);
+                brick.MoveMotor('D', 0);
+                green = 1;
+            end
+            
+                brick.StopMotor('A',100);
+                brick.StopMotor('B',50);
+            
+
+        case 4
+            disp('Yellow');
+            brick.MoveMotor('A',00);
+            brick.MoveMotor('B',00); 
+            brick.MoveMotor('D',00);
+            
+        case 5
+            disp('Red, STOP'); %stop for 4 seconds
+            if red == 0
+                brick.MoveMotor('A', 0);
+                brick.MoveMotor('B', 0);
+                pause (4.0);
+                red = 1;
+            end
+                brick.StopMotor('A',100);
+                brick.StopMotor('B',50);
+            
+            
+        case 6          % No Key is being pressed
+            disp('White! R');
+            brick.StopMotor('A',100);
+            brick.StopMotor('B',50);
+            red = 0;
+            green = 0;
+            
+        case 'q'
+            disp('bye bye');
+            break;
+            
+    end
+    
+end
+    
+
+closeKeyboard();
