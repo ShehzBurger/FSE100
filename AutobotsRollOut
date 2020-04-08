@@ -3,9 +3,13 @@ global green
 global red
 global blue
 global key
+global mycolorsensor
 InitKeyboard();
 
-brick.SetColorMode(1, 2);  % Set Color Sensor connected to Port 1 to Color RGB Mode.
+
+
+mycolorsensor = colorSensor(GUNI, 1);
+%brick.SetColorMode(1, 2);  % Set Color Sensor connected to Port 1 to Color RGB Mode.
 
 while 1
     pause (0.1);
@@ -13,7 +17,8 @@ while 1
     green = 0;
     blue = 0;
     red = 0;
-    color = brick.ColorCode(1);  % Get Color on port 1.
+    color = readColor(mycolorsensor);
+    %color = brick.ColorCode(1);  % Get Color on port 1.
     display(color);                 % Print color code of object.
 % 0 no color
 % 1 black
