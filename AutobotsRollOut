@@ -8,7 +8,7 @@ InitKeyboard();
 
 
 
-mycolorsensor = colorSensor(GUNI, 1);
+mycolorsensor = colorSensor('GUNI');
 %brick.SetColorMode(1, 2);  % Set Color Sensor connected to Port 1 to Color RGB Mode.
 
 while 1
