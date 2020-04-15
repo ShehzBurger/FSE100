@@ -1,0 +1,180 @@
+global color
+global green
+global red
+global blue
+global key
+global speed
+global hspeed
+global lORr
+%global mycolorsensor
+InitKeyboard();
+
+
+
+
+
+%mycolorsensor = colorSensor('GUNI', 1 );
+brick.SetColorMode(1, 2);  % Set Color Sensor connected to Port 1 to Color RGB Mode.
+
+speed = 100;
+hspeed = speed / 2;
+lORr = 0;
+
+% The car must start with a leftward orientation on the line to work
+% properly using the second line following method. 
+
+while 1
+    pause (0.1);
+    
+    green = 0;
+    blue = 0;
+    red = 0;
+    %color = readColor(mycolorsensor);
+    color = brick.ColorCode(1);  % Get Color on port 1.
+    display(color);                 % Print color code of object.
+% 0 no color
+% 1 black
+% 2 blue
+% 3 green
+% 4 yellow
+% 5 red
+% 6 white
+% 7 brown
+    
+    switch color    % A left motor B right motor D claw motor
+        case 'none'
+            disp('Waiting!');
+            brick.MoveMotor('A',0);
+            brick.MoveMotor('B',0);
+            brick.MoveMotor('D',0);
+
+        case 'black'
+            disp('Black! L');
+            brick.MoveMotor('A',hspeed);
+            brick.MoveMotor('B',speed);
+            
+            % alternate line following method
+            
+%             brick.MoveMotor('A', speed);
+%             brick.MoveMotor('B', speed);
+            
+
+   
+        case 'blue'
+            disp('Blue, drop off'); % this is the drop off code
+            if blue == 0
+                brick.MoveMotor('A', 0);
+                brick.MoveMotor('B', 0);
+                brick.MoveMotor('D', -hspeed);
+                pause (0.5);
+                brick.MoveMotor('D', 0);
+                blue = 1;
+            end
+            
+                brick.MoveMotor('A',speed);
+                brick.MoveMotor('B',hspeed);
+                
+                % alternate line follow code!
+%             if (lORr == 0)
+%             brick.MoveMotor('A',speed);
+%             brick.MoveMotor('B',0);
+%             lORr = 1;
+%             elseif (lORr == 1)
+%             brick.MoveMotor('A',0);
+%             brick.MoveMotor('B',speed);
+%             lORr = 0;
+%             end
+                
+                 
+            
+        case 'green'
+            disp('Green, pickup'); % this is the pickup code
+            if green == 0
+                brick.MoveMotor('A', 0);
+                brick.MoveMotor('B', 0);
+                brick.MoveMotor('D', hspeed);
+                pause (0.5);
+                brick.MoveMotor('D', 0);
+                green = 1;
+            end
+            
+                brick.MoveMotor('A',speed);
+                brick.MoveMotor('B',hspeed);
+                
+                
+                
+                % alternate line follow code!
+%             if (lORr == 0)
+%             brick.MoveMotor('A',speed);
+%             brick.MoveMotor('B',0);
+%             lORr = 1;
+%             elseif (lORr == 1)
+%             brick.MoveMotor('A',0);
+%             brick.MoveMotor('B',speed);
+%             lORr = 0;
+%             end
+            
+
+        case 'yellow'
+            disp('Yellow');
+            brick.MoveMotor('A',00);
+            brick.MoveMotor('B',00); 
+            brick.MoveMotor('D',00);
+            
+        case 'red'
+            disp('Red, STOP'); %stop for 4 seconds
+            if red == 0
+                brick.MoveMotor('A', 0);
+                brick.MoveMotor('B', 0);
+                pause (4.0);
+                red = 1;
+            end
+                brick.MoveMotor('A',speed);
+                brick.MoveMotor('B',hspeed);
+                
+                
+                % alternate line follow code!
+%             if (lORr == 0)
+%             brick.MoveMotor('A',speed);
+%             brick.MoveMotor('B',0);
+%             lORr = 1;
+%             elseif (lORr == 1)
+%             brick.MoveMotor('A',0);
+%             brick.MoveMotor('B',speed);
+%             lORr = 0;
+%             end
+            
+            
+        case 'white'          % No Key is being pressed
+            disp('White! R');
+            brick.MoveMotor('A',speed);
+            brick.MoveMotor('B',hspeed);
+
+            
+            %this is alternate code for a second line following method!
+            
+%             if (lORr == 0)
+%             brick.MoveMotor('A',speed);
+%             brick.MoveMotor('B',0);
+%             lORr = 1;
+%             elseif (lORr == 1)
+%             brick.MoveMotor('A',0);
+%             brick.MoveMotor('B',speed);
+%             lORr = 0;
+%             end
+            
+            red = 0;
+            
+    end
+            
+    switch key
+        case 'q'
+            disp ('bye bye');
+            break;
+            
+    end
+    
+end
+    
+
+closeKeyboard();
