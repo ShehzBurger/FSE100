@@ -1,0 +1,59 @@
+
+global color
+global mycolorsensor
+InitKeyboard();
+
+
+mycolorsensor = colorSensor('GUNI', 1 );
+
+while 1
+    pause (0.1);
+    
+
+    color = readColor(mycolorsensor);
+    %color = brick.ColorCode(1);  % Get Color on port 1.
+    display(color);                 % Print color code of object.
+% 0 no color
+% 1 black
+% 2 blue
+% 3 green
+% 4 yellow
+% 5 red
+% 6 white
+% 7 brown
+    
+    switch color    % A left motor B right motor D claw motor
+        case 'none'
+            disp('Waiting!');
+            
+
+        case 'black'
+            disp('Black! L');
+            brick.playTone(100, 800, 500);
+            
+        case 'blue'
+            disp('Blue, drop off'); % this is the drop off code
+            brick.playTone(200, 800, 500);;            
+            
+        case 'green'
+            disp('Green, pickup'); % this is the pickup code
+            brick.playTone(300, 800, 500);
+            
+
+        case 'yellow'
+            disp('Yellow');
+            brick.playTone(400, 800, 500);
+            
+        case 'red'
+            disp('Red, STOP'); %stop for 4 seconds
+            brick.playTone(80, 800, 500);
+            
+            
+        case 'white'          % No Key is being pressed
+            disp('White! R');
+            brick.playTone(50, 800, 500);
+            
+    end
+            
+    
+end
